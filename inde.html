@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mi esposa 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: #fff0f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  animation: fadeIn 1s ease;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Teddy pop animation */
+.teddy {
+  font-size: 80px;
+  animation: pop 1s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Pulsating question */
+.pulse {
+  color: #ff4d6d;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+p {
+  color: #555;
+  font-size: 1.2rem;
+}
+
+button {
+  margin: 10px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: #ffd6e0;
+  color: #444;
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}
+
+.poem {
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="screen1">
+  <div class="teddy">🧸💖</div>
+  <h1>Mi esposa…</h1>
+  <p class="pulse">Will you be my Valentine?</p>
+  <button class="yes" onclick="yesClicked()">Yes 💘</button>
+  <button class="no" id="noBtn">No 🙈</button>
+</div>
+
+<div class="card hidden" id="screenSad">
+  <div class="teddy">🧸😢</div>
+  <h1>You broke my heart baby 💔</h1>
+</div>
+
+<div class="card hidden" id="screenYes">
+  <div class="teddy">🧸❤️</div>
+  <h1>You said YES 💖</h1>
+  <div class="poem">
+    <p>
+      I love you for your gentle heart,<br>
+      For the way you light my days.<br>
+      For every smile, every laugh,<br>
+      In all the quiet ways.
+    </p>
+    <p>
+      You are my peace, my happiness,<br>
+      My beautiful forever true.<br>
+      Life feels warmer, softer, better,<br>
+      Simply because of you.
+    </p>
+    <p><strong>Thank you for being my Valentine ❤️</strong></p>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+/* Make the NO button run away */
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 250 - 125;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+noBtn.addEventListener("click", () => {
+  screen1.classList.add("hidden");
+  screenSad.classList.remove("hidden");
+});
+
+function yesClicked() {
+  screen1.classList.add("hidden");
+  startHearts();
+  setTimeout(() => {
+    screenYes.classList.remove("hidden");
+  }, 2000);
+}
+
+function startHearts() {
+  for (let i = 0; i < 20; i++) {
+    setTimeout(createHeart, i * 150);
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 20 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}
+</script>
+
+</body>
+</html>
